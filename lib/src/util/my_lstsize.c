@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   my_lstiter.c                                       :+:      :+:    :+:   */
+/*   my_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Yoshihiro Kosaka <ykosaka@student.42tok    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/27 13:31:56 by ykosaka           #+#    #+#             */
-/*   Updated: 2022/12/28 22:57:41 by Yoshihiro K      ###   ########.fr       */
+/*   Created: 2021/11/26 22:26:30 by ykosaka           #+#    #+#             */
+/*   Updated: 2022/12/29 16:03:20 by Yoshihiro K      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "my_libc.h"
+#include "my_utils.h"
 
-void	my_lstiter(t_list *lst, void (*f)(void *))
+int	my_lstsize(t_list *lst)
 {
-	if ((*f) != NULL)
+	int		size;
+
+	size = 0;
+	while (lst != NULL)
 	{
-		while (lst != NULL)
-		{
-			if (lst->content != NULL)
-				(*f)(lst->content);
-			lst = lst->next;
-		}
+		lst = lst->next;
+		size++;
 	}
+	return (size);
 }

@@ -6,7 +6,7 @@
 /*   By: Yoshihiro Kosaka <ykosaka@student.42tok    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 13:03:00 by ykosaka           #+#    #+#             */
-/*   Updated: 2022/12/28 23:02:31 by Yoshihiro K      ###   ########.fr       */
+/*   Updated: 2022/12/29 16:04:56 by Yoshihiro K      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define MYLIB_H
 
 # include "my_libc.h"
+# include "my_utils.h"
 # include "my_printf.h"
 
 #endif

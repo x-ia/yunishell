@@ -6,11 +6,11 @@
 /*   By: Yoshihiro Kosaka <ykosaka@student.42tok    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/27 14:03:51 by ykosaka           #+#    #+#             */
-/*   Updated: 2022/12/28 22:57:41 by Yoshihiro K      ###   ########.fr       */
+/*   Updated: 2022/12/29 16:03:20 by Yoshihiro K      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "my_libc.h"
+#include "my_utils.h"
 
 static void	*my_lstmap_f(t_list *lst, void *(*f)(void *))
 {

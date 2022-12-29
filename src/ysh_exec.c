@@ -1,21 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   my_putendl_fd.c                                    :+:      :+:    :+:   */
+/*   ysh_exec.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Yoshihiro Kosaka <ykosaka@student.42tok    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/17 19:44:04 by ykosaka           #+#    #+#             */
-/*   Updated: 2022/12/28 22:57:41 by Yoshihiro K      ###   ########.fr       */
+/*   Created: 2022/12/18 14:08:21 by                   #+#    #+#             */
+/*   Updated: 2022/12/29 15:24:55 by Yoshihiro K      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "my_libc.h"
+#include "yunishell.h"
 
-void	my_putendl_fd(char *s, int fd)
+void	ysh_exec(t_cmd *cmd)
 {
-	if (s == NULL)
-		return ;
-	my_putstr_fd(s, fd);
-	my_putchar_fd('\n', fd);
+	int	(*pf_builtin)(char *arg[]);
+
+	ysh_sigset_exec();
+	ysh_sigset_noquit();
+	pf_builtin = ysh_builtin_getfunc(cmd->arg[0]);
+	if (pf_builtin != NULL && ysh_lstsize_cmd(cmd) == 1)
+		return (ysh_builtin_exec(cmd, pf_builtin));
+	else
+		return (ysh_exec_child(cmd));
 }

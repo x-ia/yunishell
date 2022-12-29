@@ -6,7 +6,7 @@
 #    By: Yoshihiro Kosaka <ykosaka@student.42tok    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/16 16:52:37 by ykosaka           #+#    #+#              #
-#    Updated: 2022/12/28 22:58:14 by Yoshihiro K      ###   ########.fr        #
+#    Updated: 2022/12/29 16:05:54 by Yoshihiro K      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ NAME		= mylib.a
 # Component names
 NAME_LIBC	= libc
 NAME_PRINTF	= printf
+NAME_UTIL	= util
 
 # Enumeration of files
 SRC_PRINTF	= my_printf.c my_dprintf.c my_dprintf_sub.c prf_conv.c prf_getconv.c \
@@ -36,7 +37,11 @@ SRC_PRINTF	= my_printf.c my_dprintf.c my_dprintf_sub.c prf_conv.c prf_getconv.c 
 			  prf_putchar.c prf_putstr.c prf_putstrn.c \
 			  prf_ulltostr_o.c prf_ulltostr_x.c prf_ftoa.c \
 			  prf_strjoin.c prf_strtoupper.c prf_hexdigitadd.c \
-			  prf_strnchr.c prf_strrnchr.c prf_isdigit19.c prf_isxdigit1f.c \
+			  prf_strnchr.c prf_strrnchr.c prf_isdigit19.c prf_isxdigit1f.c
+SRC_UTIL	= my_putnbr_fd.c \
+			  my_lstnew.c my_lstadd_front.c my_lstsize.c my_lstlast.c \
+			  my_lstadd_back.c my_lstdelone.c my_lstclear.c \
+			  my_lstiter.c my_lstmap.c \
 			  my_wcslen.c my_isxdigit.c my_lltostr.c my_ulltostr.c
 SRC_LIBC	= my_isalpha.c my_isdigit.c my_isalnum.c \
 			  my_isascii.c my_isprint.c \
@@ -46,10 +51,7 @@ SRC_LIBC	= my_isalpha.c my_isdigit.c my_isalnum.c \
 			  my_strnstr.c my_atoi.c my_calloc.c my_strdup.c \
 			  my_substr.c my_strjoin.c my_strtrim.c my_split.c my_itoa.c \
 			  my_strmapi.c my_striteri.c \
-			  my_putchar_fd.c my_putstr_fd.c my_putendl_fd.c my_putnbr_fd.c \
-			  my_lstnew.c my_lstadd_front.c my_lstsize.c my_lstlast.c \
-			  my_lstadd_back.c my_lstdelone.c my_lstclear.c \
-			  my_lstiter.c my_lstmap.c
+			  my_putchar_fd.c my_putstr_fd.c my_puts_fd.c
 
 # Enumeration of directories
 SRCDIR		= ./src
@@ -66,8 +68,9 @@ endif
 
 # Macros to replace and/or integrate
 SRCS_LIBC	= $(addprefix $(SRCDIR)/$(NAME_LIBC)/, $(SRC_LIBC))
+SRCS_UTIL	= $(addprefix $(SRCDIR)/$(NAME_UTIL)/, $(SRC_UTIL))
 SRCS_PRINTF	= $(addprefix $(SRCDIR)/$(NAME_PRINTF)/, $(SRC_PRINTF))
-SRCS		= $(SRCS_LIBC) $(SRCS_PRINTF)
+SRCS		= $(SRCS_LIBC) $(SRCS_UTIL) $(SRCS_PRINTF)
 OBJS		= $(addprefix $(OBJDIR)/, $(notdir $(SRCS:.c=.o)))
 DEPS		= $(addprefix $(OBJDIR)/, $(notdir $(SRCS:.c=.d)))
 
@@ -107,6 +110,8 @@ $(NAME): $(OBJS)
 $(OBJDIR):
 	@mkdir -p $@
 $(OBJDIR)/%.o: $(SRCDIR)/$(NAME_LIBC)/%.c | $(OBJDIR)
+	$(CC) $(CFLAGS) $(DEF) $(INCLUDES) -o $@ -c $<
+$(OBJDIR)/%.o: $(SRCDIR)/$(NAME_UTIL)/%.c | $(OBJDIR)
 	$(CC) $(CFLAGS) $(DEF) $(INCLUDES) -o $@ -c $<
 $(OBJDIR)/%.o: $(SRCDIR)/$(NAME_PRINTF)/%.c | $(OBJDIR)
 	$(CC) $(CFLAGS) $(DEF) $(INCLUDES) -o $@ -c $<

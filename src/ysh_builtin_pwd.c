@@ -1,28 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   my_lstadd_back.c                                   :+:      :+:    :+:   */
+/*   ysh_builtin_pwd.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Yoshihiro Kosaka <ykosaka@student.42tok    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/27 00:04:24 by ykosaka           #+#    #+#             */
-/*   Updated: 2022/12/28 22:57:41 by Yoshihiro K      ###   ########.fr       */
+/*   Created: 2022/12/18 14:08:21 by                   #+#    #+#             */
+/*   Updated: 2022/12/29 13:44:50 by Yoshihiro K      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "my_libc.h"
+#include "yunishell.h"
 
-void	my_lstadd_back(t_list **lst, t_list *new)
+int	ysh_builtin_pwd(char *argv[])
 {
-	t_list	*prev;
+	char	buf[PATH_MAX + 1];
 
-	if (lst == NULL)
-		lst = &new;
-	else if (*lst == NULL)
-		*lst = new;
-	else
-	{
-		prev = my_lstlast(*lst);
-		prev->next = new;
-	}
+	if (argv == NULL)
+		return (0);
+	errno = 0;
+	my_putendl_fd(getcwd(buf, PATH_MAX), STDERR_FILENO);
+	return (errno);
 }

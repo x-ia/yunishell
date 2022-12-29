@@ -1,30 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   my_lstclear.c                                      :+:      :+:    :+:   */
+/*   my_mapclear.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Yoshihiro Kosaka <ykosaka@student.42tok    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/27 03:00:50 by ykosaka           #+#    #+#             */
-/*   Updated: 2022/12/28 22:57:41 by Yoshihiro K      ###   ########.fr       */
+/*   Created: 2022/11/09 13:03:00 by ykosaka           #+#    #+#             */
+/*   Updated: 2022/12/29 15:35:22 by Yoshihiro K      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "my_libc.h"
+#include "yunishell.h"
 
-void	my_lstclear(t_list **lst, void (*del)(void*))
+void	*my_mapclear(char **map)
 {
-	void	*next;
-	t_list	*ele;
+	size_t	i;
 
-	if (lst == NULL)
-		return ;
-	while (*lst != NULL)
-	{
-		ele = *lst;
-		next = ele->next;
-		my_lstdelone(*lst, (*del));
-		*lst = next;
-	}
-	lst = NULL;
+	if (map == NULL)
+		return (NULL);
+	i = 0;
+	while (map[i])
+		free(map[i]++);
+	free(map);
+	map = NULL;
+	return (NULL);
 }

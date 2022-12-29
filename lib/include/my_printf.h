@@ -6,7 +6,7 @@
 /*   By: Yoshihiro Kosaka <ykosaka@student.42tok    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 13:03:00 by ykosaka           #+#    #+#             */
-/*   Updated: 2022/12/28 22:57:41 by Yoshihiro K      ###   ########.fr       */
+/*   Updated: 2022/12/29 16:04:42 by Yoshihiro K      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <limits.h>
 # include <errno.h>
 # include "my_libc.h"
+# include "my_utils.h"
 # include "my_printf_typedef.h"
 # include "my_printf_const.h"
 # include "my_printf_flag.h"
@@ -68,15 +69,11 @@ char	*prf_ulltostr_o(unsigned long long n_dec, int bytes);
 char	*prf_ulltostr_x(unsigned long long n_dec, int bytes);;
 char	*prf_ftoa(long double nb, int precision);
 void	prf_strtoupper(char *str);
-size_t	my_wcslen(const char *str);
 ssize_t	prf_strnchr(const char *str, char ch, ssize_t len);
 ssize_t	prf_strrnchr(const char *str, char ch, ssize_t len);
 char	*prf_strjoin(char const *s1, char const *s2, int flag_free);
 int		prf_hexdigitadd(int c, int n);
-int		my_isxdigit(int c);
 int		prf_isdigit19(int c);
 int		prf_isxdigit1f(int c);
-char	*my_ulltostr(unsigned long long ui);
-char	*my_lltostr(long long n);
 
 #endif

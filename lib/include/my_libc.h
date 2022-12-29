@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   my_libc.h                                          :+:      :+:    :+:   */
+/*   my_utils.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Yoshihiro Kosaka <ykosaka@student.42tok    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 13:03:00 by ykosaka           #+#    #+#             */
-/*   Updated: 2022/12/28 23:02:25 by Yoshihiro K      ###   ########.fr       */
+/*   Updated: 2022/12/29 15:50:14 by Yoshihiro K      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,6 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <limits.h>
-
-typedef struct s_list
-{
-	void			*content;
-	struct s_list	*next;
-}	t_list;
 
 int		my_isalpha(int c);
 int		my_isdigit(int c);
@@ -56,15 +50,5 @@ void	my_striteri(char *s, void (*f)(unsigned int, char *));
 void	my_putchar_fd(char c, int fd);
 void	my_putstr_fd(char *s, int fd);
 void	my_putendl_fd(char *s, int fd);
-void	my_putnbr_fd(int n, int fd);
-t_list	*my_lstnew(void *content);
-void	my_lstadd_front(t_list **lst, t_list *new);
-int		my_lstsize(t_list *lst);
-t_list	*my_lstlast(t_list *lst);
-void	my_lstadd_back(t_list **lst, t_list *new);
-void	my_lstdelone(t_list *lst, void (*del)(void*));
-void	my_lstclear(t_list **lst, void (*del)(void*));
-void	my_lstiter(t_list *lst, void (*f)(void *));
-t_list	*my_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 
 #endif

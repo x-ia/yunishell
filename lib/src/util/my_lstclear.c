@@ -1,25 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   my_lstnew.c                                        :+:      :+:    :+:   */
+/*   my_lstclear.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Yoshihiro Kosaka <ykosaka@student.42tok    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/26 21:08:30 by ykosaka           #+#    #+#             */
-/*   Updated: 2022/12/28 22:57:41 by Yoshihiro K      ###   ########.fr       */
+/*   Created: 2021/11/27 03:00:50 by ykosaka           #+#    #+#             */
+/*   Updated: 2022/12/29 16:03:20 by Yoshihiro K      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "my_libc.h"
+#include "my_utils.h"
 
-t_list	*my_lstnew(void *content)
+void	my_lstclear(t_list **lst, void (*del)(void*))
 {
-	t_list	*lst;
+	void	*next;
+	t_list	*ele;
 
-	lst = malloc(sizeof(t_list));
 	if (lst == NULL)
-		return (NULL);
-	lst->content = content;
-	lst->next = NULL;
-	return (lst);
+		return ;
+	while (*lst != NULL)
+	{
+		ele = *lst;
+		next = ele->next;
+		my_lstdelone(*lst, (*del));
+		*lst = next;
+	}
+	lst = NULL;
 }

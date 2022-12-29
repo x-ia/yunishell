@@ -1,26 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   my_lstsize.c                                       :+:      :+:    :+:   */
+/*   my_lst2map.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Yoshihiro Kosaka <ykosaka@student.42tok    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/26 22:26:30 by ykosaka           #+#    #+#             */
-/*   Updated: 2022/12/28 22:57:41 by Yoshihiro K      ###   ########.fr       */
+/*   Created: 2022/11/09 13:03:00 by ykosaka           #+#    #+#             */
+/*   Updated: 2022/12/29 13:52:29 by Yoshihiro K      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "my_libc.h"
+#include "yunishell.h"
 
-int	my_lstsize(t_list *lst)
+char	**my_lst2map(t_list *lst)
 {
-	int		size;
+	char	**map;
+	t_list	*ele;
+	size_t	size;
+	size_t	i;
 
-	size = 0;
-	while (lst != NULL)
+	size = my_lstsize(lst);
+	ele = lst;
+	map = (char **)malloc((size + 1) * sizeof(char *));
+	if (map == NULL)
+		return (NULL);
+	i = 0;
+	while (i < size)
 	{
-		lst = lst->next;
-		size++;
+		map[i] = ele->content;
+		ele = ele->next;
+		i++;
 	}
-	return (size);
+	map[i] = NULL;
+	return (map);
 }
